@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Primer push de GitHub</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--text:#e6eef6}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;background:linear-gradient(180deg,#081226 0%,#071028 100%);font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    .card{background:var(--card);color:var(--text);padding:2rem;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.6);max-width:720px;width:94%}
+    h1{margin:0 0 0.5rem;font-size:clamp(1.4rem,2.6vw,2rem);color:var(--accent)}
+    p{margin:0 0 1rem;opacity:0.9}
+    pre{background:#00111a;color:#cfeff6;padding:1rem;border-radius:8px;overflow:auto}
+    .small{font-size:.9rem;color:#9fb7c3}
+    .row{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+    button{background:transparent;border:1px solid #0f9fb0;color:var(--text);padding:.5rem .8rem;border-radius:8px;cursor:pointer}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Primer push de GitHub</h1>
+    <p class="small">Documento de referencia rápido con los comandos básicos para hacer el primer push a un repositorio remoto en GitHub.</p>
+
+    <pre><code># Inicializar repositorio (si aún no está inicializado)
+git init
+
+# Añadir archivos al área de staging
+git add .
+
+# Hacer el primer commit
+git commit -m "Primer commit"
+
+# Renombrar rama principal a "main" (opcional)
+git branch -M main
+
+
+# Subir a GitHub
+git push -u origin main</code></pre>
+
+    <div class="row">
+      <button onclick="copyCommands()">Copiar comandos</button>
+      <button onclick="showHelp()">Ver ayuda rápida</button>
+    </div>
+
+    <div id="mensaje" class="small" style="margin-top:1rem;display:none">Comandos copiados al portapapeles.</div>
+  </main>
+
+  <script>
+    function copyCommands(){
+      const text = document.querySelector('pre code').innerText;
+      navigator.clipboard.writeText(text).then(()=>{
+        const m = document.getElementById('mensaje');
+        m.textContent = 'Comandos copiados al portapapeles.';
+        m.style.display = 'block';
+        setTimeout(()=>m.style.display='none',2500);
+      }).catch(()=>{
+        alert('No se pudo copiar. Selecciona y copia manualmente.');
+      });
+    }
+    function showHelp(){
+      alert('Sustituye la URL del remote por la de tu repositorio en GitHub. Si usas autenticación con token, sigue las indicaciones de GitHub para configurar credenciales.');
+    }
+  </script>
+ 
+</body>
+</html>
